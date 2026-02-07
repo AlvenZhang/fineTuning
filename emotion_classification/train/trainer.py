@@ -147,8 +147,9 @@ def train_model(trainer: Trainer) -> Dict[str, Any]:
         training_result = trainer.train()
         
         logger.info("Training completed successfully")
-        logger.info(f"Training time: {training_result.training_time:.2f} seconds")
+        # logger.info(f"Training time: {training_result.training_time:.2f} seconds")
         logger.info(f"Training loss: {training_result.training_loss:.4f}")
+        
         
         return training_result
         

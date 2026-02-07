@@ -145,3 +145,8 @@ Thumbs.db
 /dataset_cache/*
 !/dataset_cache/.gitkeep
 .trae/
+
+# Unused directories
+others/
+results/
+utils/

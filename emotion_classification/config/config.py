@@ -16,7 +16,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--model_name_or_path",
         type=str,
-        default="/Users/xifeng/python_file/fineTuning/models/Qwen3-0.6B/",
+        default="D:\\vscodefile\\fineTuning\\models\\Qwen3-0.6B",
         help="Path to pre-trained model or model identifier from Hugging Face Hub"
     )
     
@@ -31,7 +31,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dataset_cache_dir",
         type=str,
-        default="/Users/xifeng/python_file/fineTuning/emotion_dataset_cache/",
+        default="./emotion_dataset_cache/",
         help="Path to local dataset cache"
     )
     
@@ -46,7 +46,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--batch_size",
         type=int,
-        default=2,
+        default=3,
         help="Batch size for training and evaluation"
     )
     

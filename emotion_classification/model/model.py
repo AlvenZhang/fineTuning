@@ -7,8 +7,23 @@ Model setup module for Qwen3-0.6B emotion classification.
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 import logging
+import torch
 
 logger = logging.getLogger(__name__)
+
+# Get device
+def get_device():
+    """Get the appropriate device (GPU if available, otherwise CPU)."""
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        logger.info(f"Using GPU: {torch.cuda.get_device_name(0)}")
+        logger.info(f"GPU memory available: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.2f} GB")
+    else:
+        device = torch.device("cpu")
+        logger.info("No GPU found, using CPU")
+    return device
+
+device = get_device()
 
 
 def load_model(
@@ -50,9 +65,9 @@ def load_model(
                 
                 # Set up LoRA configuration
                 lora_config = LoraConfig(
-                    r=4,
+                    r=8,
                     lora_alpha=16,
-                    target_modules=["o_proj"],
+                    target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
                     lora_dropout=0.05,
                     bias="none",
                     task_type="SEQ_CLS"
@@ -68,6 +83,10 @@ def load_model(
             except Exception as e:
                 logger.error(f"PEFT configuration failed: {e}")
                 logger.warning("Continuing without PEFT")
+        
+        # Move model to device
+        model.to(device)
+        logger.info(f"Model moved to device: {device}")
         
         return model
         

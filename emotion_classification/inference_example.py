@@ -48,7 +48,7 @@ def load_test_dataset(dataset_name="emotion", cache_dir="./dataset_cache"):
 def main():
     """Main function to run inference on test dataset and calculate accuracy."""
     # Model and tokenizer paths
-    model_path = "/Users/xifeng/python_file/fineTuning/models/Qwen3-0.6B/"
+    model_path = "D:\\vscodefile\\fineTuning\\models\\Qwen3-0.6B"
     
     # Check for MPS availability
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
